@@ -4,4 +4,4 @@ set -o errexit
 set -o pipefail
 
 apt-get -q update
-apt-get -y install nano libraspberrypi-bin
+apt-get -y install nano libraspberrypi-bin fbi

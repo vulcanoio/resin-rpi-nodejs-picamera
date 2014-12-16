@@ -1,4 +1,5 @@
 var RaspiCam = require("raspicam");
+var spawn = require('child_process').spawn;
 
 var camera = new RaspiCam({
 	mode: "photo",
@@ -13,6 +14,7 @@ camera.on("started", function( err, timestamp ){
 
 camera.on("read", function( err, timestamp, filename ){
 	console.log("photo image captured with filename: " + filename );
+	spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", "../data/image.jpg"])
 });
 
 camera.on("exit", function( timestamp ){
