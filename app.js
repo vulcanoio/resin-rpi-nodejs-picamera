@@ -5,16 +5,19 @@ var camera = new RaspiCam({
 	mode: "photo",
 	output: "../data/image.jpg",
 	encoding: "jpg",
+	w: 320,
+	h: 240,
 	timeout: 0 // take the picture immediately
 });
 
-camera.on("started", function( err, timestamp ){
+camera.on("start", function( err, timestamp ){
 	console.log("photo started at " + timestamp );
 });
 
 camera.on("read", function( err, timestamp, filename ){
 	console.log("photo image captured with filename: " + filename );
-	spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", "../data/image.jpg"])
+	spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", "../data/image.jpg"]);
+	camera.stop();
 });
 
 camera.on("exit", function( timestamp ){
@@ -22,13 +25,3 @@ camera.on("exit", function( timestamp ){
 });
 
 camera.start();
-
-// var users = {};
-// if(process.env.TTYUSER && process.env.TTYPASSWORD) {
-// 	users[process.env.TTYUSER] = process.env.TTYPASSWORD;
-// }
-// require('tty.js').createServer({
-// 	shell: 'bash',
-// 	users: users,
-// 	port: process.env.TTYPORT || process.env.PORT
-// }).listen();
