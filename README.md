@@ -1,11 +1,9 @@
-# Env vars
-## Required
-### TTYPORT || PORT
-The port you want the web interface to be accessed from, TTYPORT taking priority (although PORT still needs to be specified in order to expose the port).
+# resin.io + picamera + node.js 
 
-## Optional
-### TTYUSER
-The username you want to use for tty.js.
+This is a simple app that demonstrates how to get started with the raspberry pi camera module, using node.js and [resin.io](https://resin.io/). All it does is snap one photo and then stores it in the /data directory on the pi.
 
-### TTYPASSWORD
-The password you want to use for tty.js.
+The /data directory allows the data, in this case the image, to presist between code deployments with resin.io. It then just sits in an infinite loop, this loop allows you to use the web terminal session to poke around on the pi itself and see that your photo was successfully saved in the /data directory.
+
+This project depends on raspistill, this is installed when the "apt-get install libraspberry-bin" is run in the deps.sh script.
+
+As an extension to this project you can checkout the [`lcd-branch`] (https://github.com/shaunmulligan/resin-rpi-nodejs-picamera/tree/lcd-branch) on this repo and you will see this intergrated with the awesome Adafruit [piTFT](http://www.adafruit.com/product/1601), which is a 2.8" LCD display designed for the pi.
